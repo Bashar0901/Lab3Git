@@ -1,12 +1,22 @@
+/**
+ * @author Salman Amer
+ * @author Bashar Bashir 
+ * @version 6.0z Bulid 9000 Novmber 2
+ */
 public class ThreadCheckArray implements Runnable 
-{//SecondMForTest
-	/** this is SharedData*/
+{
+	/** To check if there is sum of some numbers in the array that equal b */
 	private boolean flag;
+	/** boolean array to decide which number we choose*/
 	private boolean [] winArray;
+	/** SharedData class*/
 	SharedData sd;
+	/** Array numbers that we choose*/
 	int[] array;
+	/**The number we need to reach*/
 	int b;
-	
+	/** A method that build our class
+	 * @param sd: is a SharedData class that we put in the method to build our class */
 	public ThreadCheckArray(SharedData sd) 
 	{
 		this.sd = sd;	
@@ -17,7 +27,10 @@ public class ThreadCheckArray implements Runnable
 		}		
 		winArray = new boolean[array.length];
 	}
-	
+	/** In the first we check if n==1
+	 * 	The method finds the numbers we want to sum
+	 * @param n: array lenght
+	 * @param b: the result we want to reach*/
 	void rec(int n, int b)
 	{
 		synchronized (sd) 
@@ -50,7 +63,7 @@ public class ThreadCheckArray implements Runnable
 		}	
 		rec(n-1, b);
 	}
-
+	/**Method that run the thread*/
 	public void run() {
 		if (array.length != 1)
 			if (Thread.currentThread().getName().equals("thread1"))
